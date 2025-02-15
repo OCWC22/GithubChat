@@ -24,11 +24,11 @@ def load_environment():
 load_environment()
 
 # Check for required environment variables
-gemini_api_key = os.getenv("GEMINI_API_KEY")
-if not gemini_api_key:
+openai_api_key = os.getenv("OPENAI_API_KEY")
+if not openai_api_key:
     raise ValueError(
-        "GEMINI_API_KEY environment variable is required. Either:\n"
-        "1. Create a .env file with GEMINI_API_KEY=your-key-here (for local development)\n"
+        "OPENAI_API_KEY environment variable is required. Either:\n"
+        "1. Create a .env file with OPENAI_API_KEY=your-key-here (for local development)\n"
         "2. Set the environment variable in your deployment platform (for production)"
     )
 
@@ -50,12 +50,11 @@ app.add_middleware(
 
 # Initialize RAG component
 try:
-    # Set up OpenAI client with Gemini configuration
-    os.environ["OPENAI_API_KEY"] = gemini_api_key
-    os.environ["OPENAI_BASE_URL"] = "https://generativelanguage.googleapis.com/v1beta/openai/"
+    # Set up adalflow environment
+    os.environ["OPENAI_API_KEY"] = openai_api_key
     adal.setup_env()
     rag = RAG()
-    print("Successfully initialized RAG component with Gemini configuration")
+    print("Successfully initialized RAG component")
 except Exception as e:
     print(f"Error initializing RAG component: {e}")
     raise RuntimeError(f"Failed to initialize RAG component: {e}")
