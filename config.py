@@ -17,7 +17,7 @@ configs = {
     "generator": {
         "model_client": OpenAIClient,
         "model_kwargs": {
-            "model": "gpt-4o-mini",
+            "model": "gemini-2.0-flash",
             "temperature": 0.3,
             "stream": False,
         },
